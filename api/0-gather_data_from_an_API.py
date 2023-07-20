@@ -43,7 +43,8 @@ def main():
     completed_tasks = sum(task['completed'] for task in todo_list)
     employee_name = todo_list[0]['username']
 
-    print(f"Employee {employee_name} is done with tasks ({completed_tasks}/{total_tasks}):")
+    print(f"Employee {employee_name} is done with tasks ({completed_tasks
+          }/{total_tasks}):")
     for task in todo_list:
         if task['completed']:
             print(f"\t{task['title']}")
