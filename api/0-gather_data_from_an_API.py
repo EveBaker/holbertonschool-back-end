@@ -7,6 +7,7 @@ import sys
 
 
 def get_todo_list_employee_by_id(employee_id):
+    """fetches todo list data from employee's"""
     base_url = 'https://jsonplaceholder.typicode.com/'
     url = f'{base_url}/todos?userId={employee_id}'
 
