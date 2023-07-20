@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-Script: 0-gather_data_from_an_API.py
-Description: This script fetches the TODO list information of an employee from a JSONPlaceholder API 
+0-gather_data_from_an_API.py
+Module for todo lists
 """
 
 import requests
