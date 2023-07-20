@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Write a Python script that, using this REST API,
+this module writes a Python script that, using this REST API,
 for a given employee ID, returns information about
 his/her todo list progress.
 """
@@ -32,8 +32,8 @@ def main():
 todo_list = get_todo_list_employee_by_id(employee_id)
 
 if not todo_list:
-        print(f"Error: No data found for employee ID{Employee_id}.")
-        sys.exit(1)
+            print(f"Error: No data found for employee ID{employee_id}.")
+            sys.exit(1)
 
 total_tasks = len(todo_list)
 completed_tasks = sum(task['completed'] for task in todo_list)
