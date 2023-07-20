@@ -3,6 +3,7 @@
 Script: 0-gather_data_from_an_API.py
 Description: This script fetches the TODO list information of an employee from a JSONPlaceholder API 
 """
+
 import requests
 import sys
 
