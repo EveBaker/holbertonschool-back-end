@@ -1,12 +1,9 @@
 #!/usr/bin/python3
 """
-Script: 0-gather_data_from_an_API.py
-Description: This script fetches the TODO list information of an employee from a JSONPlaceholder API 
-             based on the given employee ID. It uses the 'requests' module to interact with the API.
-             The script accepts an integer as a command-line parameter, representing the employee ID.
-             It then displays the employee's TODO list progress, including the total number of tasks
-             and the number of completed tasks, along with the list of completed task titles.
-"""
+Write a Python script that, using this REST API,
+for a given employee ID, returns information about
+his/her TODO list progress.
+
 import requests
 import sys
 
