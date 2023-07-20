@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-#returns information about his/her TODO list progress.
+"""
+0-gather_data_from_an_API.py
+
+returns information about his/her TODO list progress.
+"""
 import requests
 import sys
 
