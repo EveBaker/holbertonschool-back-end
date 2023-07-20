@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 0-gather_data_from_an_API.py
-this module gathers todo list from emplyees
+module gathers todo list from emplyees
 """
 import requests
 import sys
