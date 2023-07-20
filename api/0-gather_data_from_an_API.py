@@ -1,39 +1,44 @@
 #!/usr/bin/python3
-"""
-This module writes a Python script that, using this REST API,
-for a given employee ID, returns information about
-his/her todo list progress.
-"""
+"""Script to use a REST API for a given employee ID, returns
+information about his/her TODO list progress"""
 import requests
 import sys
 
 
-def get_employee_data(employee_id):
-    # Send GET requests to API to fetch 'users' and 'todos' data
-    user = requests.get(f"https://jsonplaceholder.typicode.com/users/{employee_id}").json()
-    todos = requests.get(f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos").json()
+API_URL = "https://jsonplaceholder.typicode.com"
 
-    employee_name = user['name']
+def get_employee_tasks(employee_id):
+    # Send a GET request to the API endpoint
+    response_users = requests.get(f"{API_URL}/users/{employee_id}")
+    response_todos = requests.get(f"{API_URL}/todos", params={"userId": employee_id})
 
-    completed_tasks = [task for test in todos if task['completed']]
-    number_of_done_tasks = len(completed_tasks)
-
-    total_number_of_tasks = len(todos)
-
-    print(f"Employee {employee_name} is done with tasks ({number_of_done_tasks})/{total_number_of_tasks}:")
-    for task in completed_tasks:
-        print("\t". task['title'])
-
-def main():
-    if len(sys.argv) <2:
-        print("Usage: 0-gather_data_from_an_API.py <employee_id>")
+    # Ensures the requests were successful
+    if response_users.status_code != 200 or response_todos.status_code !=200:
+        print(f"Error: unable to retrieve data for employee ID {employee_id}")
         sys.exit(1)
 
+    # Convert the response from JSON format to a Python dictionary
+    user_data = response_users.json()
+    todos_data = response_todos.json()
 
-    employee_id = int(sys.argv[1])
 
+    # Extract the employee name and task data
+    employee_name = user_data.get('name')
+    total_tasks = len(todos_data)
+    completed_tasks = len([task for task in todos_data if task.get('completed')])
 
-    get_employee_data(employee_id)
+    # Print the employee's task progress
+    print(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):")
+    for task in todos_data:
+        if task.get('completed'):
+            print(f"\t {task.get('title')}")
+
+def main():
+    # The employee ID is passed as a command-line argument
+    employee_id = sys.argv[1]
+    
+    # Get the employee's task data
+    get_employee_tasks(employee_id)
 
 if __name__ == "__main__":
     main()
