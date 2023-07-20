@@ -21,6 +21,7 @@ def get_todo_list_employee_by_id(employee_id):
         print(f"Error: {e}")
         sys.exit(1)
 
+
 def main():
     if len(sys.argv) != 2:
         print("usage: python3 script_name.py <Employee_id>")
