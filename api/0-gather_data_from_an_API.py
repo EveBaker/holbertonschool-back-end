@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """
-0-gather_data_from_an_API.py
+0-gather_data_from_an_API.py:
 Module for todo lists
 """
-
 import requests
 import sys
 
