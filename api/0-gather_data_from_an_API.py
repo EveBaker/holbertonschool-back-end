@@ -1,12 +1,10 @@
 #!/usr/bin/python3
-"""
-0-gather_data_from_an_API.py
-
-returns information about his/her TODO list progress.
-"""
 import requests
 import sys
-
+"""
+0-gather_data_from_an_API.py
+returns information about his/her TODO list progress.
+"""
 
 def get_todo_list_employee_by_id(employee_id):
     """fetches todo list data from employee's"""
