@@ -25,10 +25,6 @@ if __name__ == "__main__":
 
     employee_name = data[0]["user"]["name"]
     total_tasks = len(data)
-    done_tasks = [task for task in data if task["completed"]]
-    total_done_tasks = len(done_tasks)
-
-    print(f"Employee {employee_name} is done with tasks"
-        f"({total_done_tasks}/{total_tasks}):")
-    for task in done_tasks:
-        print(f"\t {task['title']}")
+    tasks = [{"task": task["title"], "completed": task["completed"], "username": employee_name} for task in data]
+    with open(f"{EMPLOYEE_ID}.json", "w") as file:
+        json.dump({EMPLOYEE_ID: tasks}, file)
