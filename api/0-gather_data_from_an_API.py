@@ -5,40 +5,30 @@ import requests
 import sys
 
 
-API_URL = "https://jsonplaceholder.typicode.com"
-
-def get_employee_tasks(employee_id):
-    # Send a GET request to the API endpoint
-    response_users = requests.get(f"{API_URL}/users/{employee_id}")
-    response_todos = requests.get(f"{API_URL}/todos", params={"userId": employee_id})
-
-    # Ensures the requests were successful
-    if response_users.status_code != 200 or response_todos.status_code !=200:
-        print(f"Error: unable to retrieve data for employee ID {employee_id}")
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print(f"UsageError: python3 {__file__} employee_id(int)")
         sys.exit(1)
 
-    # Convert the response from JSON format to a Python dictionary
-    user_data = response_users.json()
-    todos_data = response_todos.json()
+    API_URL = "https://jsonplaceholder.typicode.com"
+    EMPLOYEE_ID = sys.argv[1]
 
+    response = requests.get(
+        f"{API_URL}/users/{EMPLOYEE_ID}/todos",
+        params={"_expand": "user"}
+    )
+    data = response.json()
 
-    # Extract the employee name and task data
-    employee_name = user_data.get('name')
-    total_tasks = len(todos_data)
-    completed_tasks = len([task for task in todos_data if task.get('completed')])
+    if not len(data):
+        print("RequestError:", 404)
+        sys.exit(1)
 
-    # Print the employee's task progress
-    print(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):")
-    for task in todos_data:
-        if task.get('completed'):
-            print(f"\t {task.get('title')}")
+    employee_name = data[0]["user"]["name"]
+    total_tasks = len(data)
+    done_tasks = [task for task in data if task["completed"]]
+    total_done_tasks = len(done_tasks)
 
-def main():
-    # The employee ID is passed as a command-line argument
-    employee_id = sys.argv[1]
-    
-    # Get the employee's task data
-    get_employee_tasks(employee_id)
-
-if __name__ == "__main__":
-    main()
+    print(f"Employee {employee_name} is done with tasks"
+        f"({total_done_tasks}/{total_tasks}):")
+    for task in done_tasks:
+        print(f"\t {task['title']}")
