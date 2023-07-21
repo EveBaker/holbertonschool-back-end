@@ -23,8 +23,14 @@ if __name__ == "__main__":
         print("RequestError:", 404)
         sys.exit(1)
 
-    employee_name = data[0]["user"]["name"]
-    total_tasks = len(data)
-    tasks = [{"task": task["title"], "completed": task["completed"], "username": employee_name} for task in data]
+    user_tasks = {EMPLOYEE_ID: []}
+    for task in data:
+        task_dict = {
+            "task": task["title"],
+            "completed": task["completed"],
+            "username": task["user"]["username"]
+        }
+        user_tasks[EMPLOYEE_ID].append(task_dict)
+
     with open(f"{EMPLOYEE_ID}.json", "w") as file:
-        json.dump({EMPLOYEE_ID: tasks}, file)
+        json.dump(user_tasks, file)
