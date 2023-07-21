@@ -6,9 +6,9 @@ import requests
 import sys
 
 
-if __name_ == "__main__":
+if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print(f"UsageError:python3 {__file__} employee_id(int)")
+        print(f"UsageError: python3 {__file__} employee_id(int)")
         sys.exit(1)
 
     API_URL = "https://jsonplaceholder.typicode.com"
@@ -27,8 +27,8 @@ if __name_ == "__main__":
     username = data[0]["user"]["username"]
 
     with open(f"{EMPLOYEE_ID}.csv", "w", newline="") as file:
-        writer = csv.wirter(file, quoting=csv.QUOTE_NONNUMERIC) # Creates a CSV writer object
-        for task in data: # Loops through each task in the received data
+        writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
+        for task in data:
             writer.writerow(
-                    [EMPLOYEE_ID, username, str(task["completed"]), task["title"]]
+                [EMPLOYEE_ID, username, str(task["completed"]), task["title"]]
             )
