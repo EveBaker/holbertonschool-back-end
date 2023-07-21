@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Script to use a REST API for a given employee ID, returns
-information about his/her TODO list progress"""
+information about his/her TODO list progress."""
 import json
 import requests
 
@@ -19,7 +19,7 @@ if __name__ == "__main__":
             "completed": task['completed']
         })
 
-    tasks_dict[user['id']] = task_list
+    task_dict[user['id']] = task_list
 
     with open("todo_all_employees.json", "w") as file:
-        json.dump(tasks_dict, file)
+        json.dump(task_dict, file)
